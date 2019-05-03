@@ -1,0 +1,380 @@
+INFO:__main__:Bot has started Running
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 1
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;1;nothing;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 2
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;2;nothing;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 3
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;3;move 9 3;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 4
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;4;move 31 16;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 5
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;5;nothing;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 6
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;6;dig 10 3;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 7
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;7;move 31 17;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 8
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;8;nothing;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 9
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;9;dig 10 2;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 10
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;10;dig 30 18;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 11
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;11;move 10 28;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 12
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;12;nothing;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 13
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;13;move 30 17;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 14
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;14;move 10 29;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 15
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;15;move 8 2;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 16
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;16;move 30 18;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 17
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;17;move 9 30;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 18
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;18;nothing;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 19
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;19;nothing;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 20
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;20;dig 9 31;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 21
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;21;nothing;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 22
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;22;move 31 19;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 23
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;23;nothing;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 24
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;24;move 9 2;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 25
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;25;nothing;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 26
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;26;nothing;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 27
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;27;move 9 3;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 28
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;28;dig 31 18;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 29
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;29;move 10 29;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 30
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;30;move 10 3;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 31
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;31;nothing;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 32
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;32;dig 11 28;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 33
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;33;move 11 3;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 34
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;34;nothing;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 35
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;35;move 9 30;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 36
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;36;dig 10 4;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 37
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;37;move 30 20;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 38
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;38;move 10 29;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 39
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;39;move 10 2;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 40
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;40;dig 31 21;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 41
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;41;nothing;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 42
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;42;nothing;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 43
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;43;dig 31 20;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 44
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;44;move 9 28;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 45
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;45;dig 10 1;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 46
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;46;nothing;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 47
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;47;nothing;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 48
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;48;nothing;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 49
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;49;move 29 19;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 50
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;50;move 9 29;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 51
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;51;move 11 3;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 52
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;52;nothing;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 53
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;53;nothing;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 54
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;54;nothing;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 55
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;55;move 28 20;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 56
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;56;nothing;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 57
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;57;nothing;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 58
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;58;nothing;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 59
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;59;nothing;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 60
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;60;move 10 3;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 61
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;61;nothing;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 62
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;62;nothing;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 63
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;63;move 11 2;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 64
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;64;dig 27 21;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 65
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;65;move 8 29;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 66
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;66;move 10 1;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 67
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;67;move 27 21;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 68
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;68;nothing;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 69
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;69;dig 11 1;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 70
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;70;dig 28 22;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 71
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;71;dig 7 28;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 72
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;72;dig 9 1;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 73
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;73;nothing;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 74
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;74;nothing;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 75
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
+INFO:__main__:Writing command : C;75;move 11 1;
+INFO:__main__:Waiting for next round.
+INFO:__main__:Starting Round : 76
+INFO:__main__:Done loading new round info
+INFO:__main__:Beginning StarterBot Logic Sequence
