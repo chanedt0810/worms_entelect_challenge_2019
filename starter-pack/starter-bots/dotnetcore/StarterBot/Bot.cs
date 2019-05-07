@@ -5,7 +5,6 @@ using StarterBot.Entities;
 using StarterBot.Entities.Commands;
 using StarterBot.Enums;
 using StarterBot.Exceptions;
-//Test
 
 namespace StarterBot
 {
