@@ -30,33 +30,39 @@ namespace StarterBot
 
             var opponentWorms = gameState.Opponents.First().Worms.Where(worm => worm.Health > 0);
 
+            var healthPacks = GetHealthPackCells();
+
             var opponentWormsInRangeOfActiveWorm =
                 GetOpponentWormsInRangeOfActiveWorm(opponentWorms, currentActiveWorm);
 
             var opponentWormsWithoutObstaclesInRange =
                 GetOpponentWormsWithoutObstacles(opponentWormsInRangeOfActiveWorm, currentActiveWorm);
 
-            if (opponentWormsWithoutObstaclesInRange.Any())
+            if (opponentWormsWithoutObstaclesInRange.Any() && healthPacks.Length == 0)
             {
                 var targetWorm = opponentWormsWithoutObstaclesInRange.First();
                 var shotDirection = GetShootDirection(targetWorm, currentActiveWorm);
 
                 command = new ShootCommand() {Direction = shotDirection};
             }
+            else if (opponentWormsInRangeOfActiveWorm.Any() && healthPacks.Length == 0)
+            {
+                command = GetCommand(opponentWormsInRangeOfActiveWorm, currentActiveWorm, healthPacks);
+            }
             else
             {
-                command = GetRandomCommand(currentActiveWorm);
+                command = GetCommand(opponentWorms, currentActiveWorm, healthPacks);
             }
 
 
             return command?.RenderCommand();
         }
 
-        private ICommand GetRandomCommand(Worm currentActiveWorm)
+        private ICommand GetCommand(IEnumerable<Worm> opponentWorms, Worm currentActiveWorm, CellStateContainer[] healthPacks)
         {
             ICommand command;
-            var random = new Random();
-
+            var shortestPath = 999999d;
+            var randomCell = new CellStateContainer();
             var validCells = GetValidAdjacentCells(currentActiveWorm);
 
             if (!validCells.Any())
@@ -64,7 +70,39 @@ namespace StarterBot
                 return new DoNothingCommand();
             }
 
-            var randomCell = validCells[random.Next(0, validCells.Length)];
+            if (healthPacks.Length != 0)
+            {
+                foreach (var health in healthPacks)
+                {
+                    foreach (var cell in validCells)
+                    {
+                        var path = Math.Sqrt(Math.Pow(cell.X - health.X, 2) + Math.Pow(cell.Y - health.Y, 2));
+
+                        if (path < shortestPath)
+                        {
+                            shortestPath = path;
+                            randomCell = cell;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                foreach (var worm in opponentWorms)
+                {
+                    foreach (var cell in validCells)
+                    {
+                        var path = Math.Sqrt(Math.Pow(cell.X - worm.Position.X, 2) + Math.Pow(cell.Y - worm.Position.Y, 2));
+
+                        if (path < shortestPath)
+                        {
+                            shortestPath = path;
+                            randomCell = cell;
+                        }
+                    }
+                }
+            }
+            
             var randomCellPosition = new MapPosition() {X = randomCell.X, Y = randomCell.Y};
 
             switch (randomCell.Type)
@@ -120,6 +158,30 @@ namespace StarterBot
             }
 
             return adjacentCells.ToArray();
+        }
+
+        private CellStateContainer[] GetHealthPackCells()
+        {
+            var healthPacks = new List<CellStateContainer>();
+            var map = gameState.Map;
+
+            for (var i = 0; i < gameState.MapSize; i++)
+            {
+                for (var j = 0; j < gameState.MapSize; j++)
+                {
+                    if (map[i][j].PowerUp == null || map[i][j].PowerUp.Type != PowerUpType.HEALTH_PACK)
+                    {
+                        continue;
+                    }
+
+                    if (map[i][j].PowerUp.Type == PowerUpType.HEALTH_PACK)
+                    {
+                        healthPacks.Add(map[i][j]);
+                    }
+                }
+            }
+
+            return healthPacks.ToArray();
         }
 
         private string GetShootDirection(Worm targetWorm, Worm currentActiveWorm)
