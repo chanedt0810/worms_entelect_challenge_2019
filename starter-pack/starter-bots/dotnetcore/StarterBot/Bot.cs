@@ -30,13 +30,15 @@ namespace StarterBot
 
             var opponentWorms = gameState.Opponents.First().Worms.Where(worm => worm.Health > 0);
 
+            var friendlyWorms = GetFriendlyWorms(); //Friendly.First().Worms.Where(worm => worm.Health > 0 /*&& worm.Position.X != currentActiveWorm.Position.X && worm.Position.Y != currentActiveWorm.Position.Y*/);
+
             var healthPacks = GetHealthPackCells();
 
             var opponentWormsInRangeOfActiveWorm =
                 GetOpponentWormsInRangeOfActiveWorm(opponentWorms, currentActiveWorm);
 
             var opponentWormsWithoutObstaclesInRange =
-                GetOpponentWormsWithoutObstacles(opponentWormsInRangeOfActiveWorm, currentActiveWorm);
+                GetOpponentWormsWithoutObstacles(opponentWormsInRangeOfActiveWorm, currentActiveWorm, friendlyWorms);
 
             if (opponentWormsWithoutObstaclesInRange.Any() && healthPacks.Length == 0)
             {
@@ -62,7 +64,7 @@ namespace StarterBot
         {
             ICommand command;
             var shortestPath = 999999d;
-            var randomCell = new CellStateContainer();
+            var moveCell = new CellStateContainer();
             var validCells = GetValidAdjacentCells(currentActiveWorm);
 
             if (!validCells.Any())
@@ -70,53 +72,50 @@ namespace StarterBot
                 return new DoNothingCommand();
             }
 
-            if (healthPacks.Length != 0)
+            foreach (var cell in validCells)
             {
-                foreach (var health in healthPacks)
+                if (healthPacks.Length != 0)
                 {
-                    foreach (var cell in validCells)
+                    foreach (var health in healthPacks)
                     {
-                        var path = Math.Sqrt(Math.Pow(cell.X - health.X, 2) + Math.Pow(cell.Y - health.Y, 2));
+                        var path = GetDistanceFromActiveWorm(new MapPosition { X = health.X, Y = health.Y }, new MapPosition { X = cell.X, Y = cell.Y });
 
                         if (path < shortestPath)
                         {
                             shortestPath = path;
-                            randomCell = cell;
+                            moveCell = cell;
                         }
                     }
                 }
-            }
-            else
-            {
-                foreach (var worm in opponentWorms)
+                else
                 {
-                    foreach (var cell in validCells)
+                    foreach (var worm in opponentWorms)
                     {
-                        var path = Math.Sqrt(Math.Pow(cell.X - worm.Position.X, 2) + Math.Pow(cell.Y - worm.Position.Y, 2));
+                        var path = GetDistanceFromActiveWorm(worm.Position, new MapPosition { X = cell.X, Y = cell.Y });
 
                         if (path < shortestPath)
                         {
                             shortestPath = path;
-                            randomCell = cell;
+                            moveCell = cell;
                         }
-                    }
+                    }                    
                 }
             }
-            
-            var randomCellPosition = new MapPosition() {X = randomCell.X, Y = randomCell.Y};
 
-            switch (randomCell.Type)
+            var cellPosition = new MapPosition() {X = moveCell.X, Y = moveCell.Y};
+
+            switch (moveCell.Type)
             {
                 case CellType.AIR:
                     command = new MoveCommand()
                     {
-                        MapPosition = randomCellPosition
+                        MapPosition = cellPosition
                     };
                     break;
                 case CellType.DIRT:
                     command = new DigCommand()
                     {
-                        MapPosition = randomCellPosition
+                        MapPosition = cellPosition
                     };
                     break;
                 default:
@@ -184,6 +183,30 @@ namespace StarterBot
             return healthPacks.ToArray();
         }
 
+        private IEnumerable<Worm> GetFriendlyWorms()
+        {
+            var friendlyWorms = new List<Worm>();
+            var map = gameState.Map;
+
+            for (var i = 0; i < gameState.MapSize; i++)
+            {
+                for (var j = 0; j < gameState.MapSize; j++)
+                {
+                    if (map[i][j].Occupier == null || gameState.MyPlayer.Id != map[i][j].Occupier.PlayerId)
+                    {
+                        continue;
+                    }
+
+                    if (gameState.MyPlayer.Id == map[i][j].Occupier.PlayerId && gameState.CurrentWormId != map[i][j].Occupier.Id)
+                    {
+                        friendlyWorms.Add(map[i][j].Occupier);
+                    }
+                }
+            }
+
+            return friendlyWorms;
+        }
+
         private string GetShootDirection(Worm targetWorm, Worm currentActiveWorm)
         {
             var directionString = "";
@@ -209,15 +232,16 @@ namespace StarterBot
             return directionString;
         }
 
-        private IEnumerable<Worm> GetOpponentWormsWithoutObstacles(IEnumerable<Worm> opponentWorms,
-            Worm activeWorm)
+        private IEnumerable<Worm> GetOpponentWormsWithoutObstacles(IEnumerable<Worm> opponentWorms, Worm activeWorm, IEnumerable<Worm> friendlyWorms)
         {
             var map = gameState.Map;
             var wormsWithoutObstaclesInRange = new List<Worm>();
+
             foreach (var worm in opponentWorms)
             {
                 var x = worm.Position.X;
                 var y = worm.Position.Y;
+                var friendlyFire = false;
 
                 while (x != activeWorm.Position.X || y != activeWorm.Position.Y)
                 {
@@ -241,7 +265,15 @@ namespace StarterBot
 
                     var cellType = map[y][x].Type;
 
-                    if (cellType == CellType.DIRT || cellType == CellType.DEEP_SPACE)
+                    foreach (var friendly in friendlyWorms)
+                    {
+                        if (x == friendly.Position.X && y == friendly.Position.Y)
+                        {
+                            friendlyFire = true;
+                        }
+                    }
+
+                    if (cellType == CellType.DIRT || cellType == CellType.DEEP_SPACE || friendlyFire == true)
                     {
                         break;
                     }
