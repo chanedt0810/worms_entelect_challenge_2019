@@ -1,7 +1,7 @@
 {
-	"author": "John Doe",
-	"email": "john.doe@example.com",
-	"nickName": "Bill",
+	"author": "Chane Du Toit",
+	"email": "chanedt1008@gmail.com",
+	"nickName": "Chane",
 	"botLocation": "/StarterBot/bin/Debug/netcoreapp2.0",
 	"botFileName": "StarterBot.dll",
 	"botLanguage": "dotnetcore"

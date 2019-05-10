@@ -5,7 +5,6 @@ using StarterBot.Entities;
 using StarterBot.Entities.Commands;
 using StarterBot.Enums;
 using StarterBot.Exceptions;
-//Test
 
 namespace StarterBot
 {
@@ -31,33 +30,41 @@ namespace StarterBot
 
             var opponentWorms = gameState.Opponents.First().Worms.Where(worm => worm.Health > 0);
 
+            var friendlyWorms = GetFriendlyWorms(); //Friendly.First().Worms.Where(worm => worm.Health > 0 /*&& worm.Position.X != currentActiveWorm.Position.X && worm.Position.Y != currentActiveWorm.Position.Y*/);
+
+            var healthPacks = GetHealthPackCells();
+
             var opponentWormsInRangeOfActiveWorm =
                 GetOpponentWormsInRangeOfActiveWorm(opponentWorms, currentActiveWorm);
 
             var opponentWormsWithoutObstaclesInRange =
-                GetOpponentWormsWithoutObstacles(opponentWormsInRangeOfActiveWorm, currentActiveWorm);
+                GetOpponentWormsWithoutObstacles(opponentWormsInRangeOfActiveWorm, currentActiveWorm, friendlyWorms);
 
-            if (opponentWormsWithoutObstaclesInRange.Any())
+            if (opponentWormsWithoutObstaclesInRange.Any() && healthPacks.Length == 0)
             {
                 var targetWorm = opponentWormsWithoutObstaclesInRange.First();
                 var shotDirection = GetShootDirection(targetWorm, currentActiveWorm);
 
                 command = new ShootCommand() {Direction = shotDirection};
             }
+            else if (opponentWormsInRangeOfActiveWorm.Any() && healthPacks.Length == 0)
+            {
+                command = GetCommand(opponentWormsInRangeOfActiveWorm, currentActiveWorm, healthPacks);
+            }
             else
             {
-                command = GetRandomCommand(currentActiveWorm);
+                command = GetCommand(opponentWorms, currentActiveWorm, healthPacks);
             }
 
 
             return command?.RenderCommand();
         }
 
-        private ICommand GetRandomCommand(Worm currentActiveWorm)
+        private ICommand GetCommand(IEnumerable<Worm> opponentWorms, Worm currentActiveWorm, CellStateContainer[] healthPacks)
         {
             ICommand command;
-            var random = new Random();
-
+            var shortestPath = 999999d;
+            var moveCell = new CellStateContainer();
             var validCells = GetValidAdjacentCells(currentActiveWorm);
 
             if (!validCells.Any())
@@ -65,21 +72,50 @@ namespace StarterBot
                 return new DoNothingCommand();
             }
 
-            var randomCell = validCells[random.Next(0, validCells.Length)];
-            var randomCellPosition = new MapPosition() {X = randomCell.X, Y = randomCell.Y};
+            foreach (var cell in validCells)
+            {
+                if (healthPacks.Length != 0)
+                {
+                    foreach (var health in healthPacks)
+                    {
+                        var path = GetDistanceFromActiveWorm(new MapPosition { X = health.X, Y = health.Y }, new MapPosition { X = cell.X, Y = cell.Y });
 
-            switch (randomCell.Type)
+                        if (path < shortestPath)
+                        {
+                            shortestPath = path;
+                            moveCell = cell;
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (var worm in opponentWorms)
+                    {
+                        var path = GetDistanceFromActiveWorm(worm.Position, new MapPosition { X = cell.X, Y = cell.Y });
+
+                        if (path < shortestPath)
+                        {
+                            shortestPath = path;
+                            moveCell = cell;
+                        }
+                    }                    
+                }
+            }
+
+            var cellPosition = new MapPosition() {X = moveCell.X, Y = moveCell.Y};
+
+            switch (moveCell.Type)
             {
                 case CellType.AIR:
                     command = new MoveCommand()
                     {
-                        MapPosition = randomCellPosition
+                        MapPosition = cellPosition
                     };
                     break;
                 case CellType.DIRT:
                     command = new DigCommand()
                     {
-                        MapPosition = randomCellPosition
+                        MapPosition = cellPosition
                     };
                     break;
                 default:
@@ -123,6 +159,54 @@ namespace StarterBot
             return adjacentCells.ToArray();
         }
 
+        private CellStateContainer[] GetHealthPackCells()
+        {
+            var healthPacks = new List<CellStateContainer>();
+            var map = gameState.Map;
+
+            for (var i = 0; i < gameState.MapSize; i++)
+            {
+                for (var j = 0; j < gameState.MapSize; j++)
+                {
+                    if (map[i][j].PowerUp == null || map[i][j].PowerUp.Type != PowerUpType.HEALTH_PACK)
+                    {
+                        continue;
+                    }
+
+                    if (map[i][j].PowerUp.Type == PowerUpType.HEALTH_PACK)
+                    {
+                        healthPacks.Add(map[i][j]);
+                    }
+                }
+            }
+
+            return healthPacks.ToArray();
+        }
+
+        private IEnumerable<Worm> GetFriendlyWorms()
+        {
+            var friendlyWorms = new List<Worm>();
+            var map = gameState.Map;
+
+            for (var i = 0; i < gameState.MapSize; i++)
+            {
+                for (var j = 0; j < gameState.MapSize; j++)
+                {
+                    if (map[i][j].Occupier == null || gameState.MyPlayer.Id != map[i][j].Occupier.PlayerId)
+                    {
+                        continue;
+                    }
+
+                    if (gameState.MyPlayer.Id == map[i][j].Occupier.PlayerId && gameState.CurrentWormId != map[i][j].Occupier.Id)
+                    {
+                        friendlyWorms.Add(map[i][j].Occupier);
+                    }
+                }
+            }
+
+            return friendlyWorms;
+        }
+
         private string GetShootDirection(Worm targetWorm, Worm currentActiveWorm)
         {
             var directionString = "";
@@ -148,15 +232,16 @@ namespace StarterBot
             return directionString;
         }
 
-        private IEnumerable<Worm> GetOpponentWormsWithoutObstacles(IEnumerable<Worm> opponentWorms,
-            Worm activeWorm)
+        private IEnumerable<Worm> GetOpponentWormsWithoutObstacles(IEnumerable<Worm> opponentWorms, Worm activeWorm, IEnumerable<Worm> friendlyWorms)
         {
             var map = gameState.Map;
             var wormsWithoutObstaclesInRange = new List<Worm>();
+
             foreach (var worm in opponentWorms)
             {
                 var x = worm.Position.X;
                 var y = worm.Position.Y;
+                var friendlyFire = false;
 
                 while (x != activeWorm.Position.X || y != activeWorm.Position.Y)
                 {
@@ -180,7 +265,15 @@ namespace StarterBot
 
                     var cellType = map[y][x].Type;
 
-                    if (cellType == CellType.DIRT || cellType == CellType.DEEP_SPACE)
+                    foreach (var friendly in friendlyWorms)
+                    {
+                        if (x == friendly.Position.X && y == friendly.Position.Y)
+                        {
+                            friendlyFire = true;
+                        }
+                    }
+
+                    if (cellType == CellType.DIRT || cellType == CellType.DEEP_SPACE || friendlyFire == true)
                     {
                         break;
                     }
