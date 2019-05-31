@@ -5,6 +5,7 @@ using StarterBot.Entities;
 using StarterBot.Entities.Commands;
 using StarterBot.Enums;
 using StarterBot.Exceptions;
+using StarterBot.Logic;
 
 namespace StarterBot
 {
@@ -63,27 +64,29 @@ namespace StarterBot
         private ICommand GetCommand(IEnumerable<Worm> opponentWorms, Worm currentActiveWorm, CellStateContainer[] healthPacks)
         {
             ICommand command;
-            var shortestPath = 999999d;
-            var moveCell = new CellStateContainer();
-            var validCells = GetValidAdjacentCells(currentActiveWorm);
+            var shortestDistance = 999999999d;
+            var targetCell = new CellStateContainer();
+            //var validCells = GetValidAdjacentCells(currentActiveWorm);
+            var startCell = gameState.Map[currentActiveWorm.Position.Y][currentActiveWorm.Position.X];
+            
 
-            if (!validCells.Any())
-            {
-                return new DoNothingCommand();
-            }
+            //if (!validCells.Any())
+            //{
+            //    return new DoNothingCommand();
+            //}
 
-            foreach (var cell in validCells)
-            {
+            //foreach (var cell in validCells)
+            //{
                 if (healthPacks.Length != 0)
                 {
                     foreach (var health in healthPacks)
                     {
-                        var path = GetDistanceFromActiveWorm(new MapPosition { X = health.X, Y = health.Y }, new MapPosition { X = cell.X, Y = cell.Y });
+                        var path = GetDistanceFromActiveWorm(new MapPosition { X = health.X, Y = health.Y }, new MapPosition { X = startCell.X, Y = startCell.Y });
 
-                        if (path < shortestPath)
+                        if (path < shortestDistance)
                         {
-                            shortestPath = path;
-                            moveCell = cell;
+                            shortestDistance = path;
+                            targetCell = health;
                         }
                     }
                 }
@@ -91,20 +94,23 @@ namespace StarterBot
                 {
                     foreach (var worm in opponentWorms)
                     {
-                        var path = GetDistanceFromActiveWorm(worm.Position, new MapPosition { X = cell.X, Y = cell.Y });
+                        var path = GetDistanceFromActiveWorm(worm.Position, new MapPosition { X = startCell.X, Y = startCell.Y });
 
-                        if (path < shortestPath)
+                        if (path < shortestDistance)
                         {
-                            shortestPath = path;
-                            moveCell = cell;
+                            shortestDistance = path;
+                            targetCell = gameState.Map[worm.Position.Y][worm.Position.X];
                         }
                     }                    
                 }
-            }
+            //}
 
-            var cellPosition = new MapPosition() {X = moveCell.X, Y = moveCell.Y};
+            var pathFinder = new PathFinder(startCell, targetCell);
+            var cellPositionTest = pathFinder.GetMovePosition();
 
-            switch (moveCell.Type)
+            var cellPosition = new MapPosition() {X = targetCell.X, Y = targetCell.Y};
+
+            switch (targetCell.Type)
             {
                 case CellType.AIR:
                     command = new MoveCommand()
